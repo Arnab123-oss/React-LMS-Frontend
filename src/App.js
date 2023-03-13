@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/home/Home';
 import Hader from './components/Layout/Hader/Hader';
@@ -23,6 +23,8 @@ import Dashboard from './components/Admin/Dashboard/Dashboard';
 import CreateCourses from './components/Admin/CreateCourses/CreateCourses';
 import AdminCourse from './components/Admin/AdminCourses/AdminCourses';
 import Users from './components/Admin/Users/User';
+import { useDispatch, useSelector } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 function App() {
   //for prevent right click
 
@@ -30,9 +32,28 @@ function App() {
   //   e.preventDefault()
   // });
 
+  const { isAuthenticated, user, message, error } = useSelector(
+    state => state.user
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+
+  }, [dispatch,error,message]);
+
   return (
     <Router>
-      <Hader />
+      <Hader isAuthenticated={isAuthenticated} user={user} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
@@ -61,6 +82,7 @@ function App() {
         <Route path="/admin/users" element={<Users />} />
       </Routes>
       <Footer />
+      <Toaster />
     </Router>
   );
 }

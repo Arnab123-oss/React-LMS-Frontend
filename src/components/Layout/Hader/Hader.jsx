@@ -10,12 +10,8 @@ const LinkButton = ({url='/' , title='Home',onClose}) => (
     </Link>
     );
 
-const Hader = () => {
+const Hader = ({isAuthenticated = false,user}) => {
     const {isOpen,onClose,onOpen}= useDisclosure();
-    const isAuth=true;
-    const user= {
-        role:"admin",
-    }
 
     const logoutHandler = () => {
         console.warn("User logged out");
@@ -47,7 +43,7 @@ return(
                     position={"absolute"} 
                     bottom={"2rem"} 
                     width={"80%"}>
-                        {isAuth?(
+                        {isAuthenticated ?(
                         <>
                         <VStack>
                             <HStack>
