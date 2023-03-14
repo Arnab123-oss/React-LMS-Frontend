@@ -3,6 +3,8 @@ import {ColorModeSwitcher} from '../../../ColorModeSwitcher'
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, VStack, useDisclosure } from "@chakra-ui/react";
 import {RiDashboardFill, RiLogoutBoxLine, RiMenu5Fill} from 'react-icons/ri'
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../redux/actions/user";
 
 const LinkButton = ({url='/' , title='Home',onClose}) => (
         <Link to= {url} onClick={onClose}>
@@ -13,9 +15,12 @@ const LinkButton = ({url='/' , title='Home',onClose}) => (
 const Hader = ({isAuthenticated = false,user}) => {
     const {isOpen,onClose,onOpen}= useDisclosure();
 
+    const dispatch=useDispatch(); 
+
+
     const logoutHandler = () => {
-        console.warn("User logged out");
         onClose();
+        dispatch(logOut())
     }
 
 return(

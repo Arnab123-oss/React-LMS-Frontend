@@ -24,7 +24,10 @@ import CreateCourses from './components/Admin/CreateCourses/CreateCourses';
 import AdminCourse from './components/Admin/AdminCourses/AdminCourses';
 import Users from './components/Admin/Users/User';
 import { useDispatch, useSelector } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
+import { loadUser } from './redux/actions/user';
+import { ProtectedRoute } from 'protected-route-react';
+
 function App() {
   //for prevent right click
 
@@ -48,8 +51,11 @@ function App() {
       toast.success(message);
       dispatch({ type: 'clearMessage' });
     }
+  }, [dispatch, error, message]);
 
-  }, [dispatch,error,message]);
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
 
   return (
     <Router>
@@ -60,9 +66,36 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/request" element={<Request />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute
+              isAuthenticated={!isAuthenticated}
+              redirect="/profile"
+            >
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute
+              isAuthenticated={!isAuthenticated}
+              redirect="/profile"
+            >
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/changepassword" element={<ChangePassword />} />
         <Route path="/updateprofile" element={<UpdateProfile />} />

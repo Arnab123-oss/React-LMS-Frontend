@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Container,
   Box,
   Button,
   FormLabel,
@@ -10,18 +11,21 @@ import {
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/user';
-const Login = () => {
-  const { email, setEmail } = useState();
-  const { password, setPassword } = useState();
 
-  const dispatch = useDispatch;
+
+
+const Login = () => {
+  const [ email, setEmail ] = useState();
+  const [ password, setPassword ] = useState();
+  
+  const dispatch = useDispatch();
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(login(email.password));
+    dispatch(login(email,password));
   };
   return (
-    <container h={'95vh'}>
+    <Container h={'95vh'}>
       <VStack h={'90vh'} justifyContent="center" spacing={'16'}>
         <Heading children="Welcome to our Lms" />
 
@@ -64,7 +68,7 @@ const Login = () => {
           </Button>
 
           <Box my="4">
-            New User{' '}
+            New User ?{' '}
             <Link to="/register">
               <Button colorScheme={'pink'} variant={'link'}>
                 Sign Up
@@ -74,7 +78,7 @@ const Login = () => {
           </Box>
         </form>
       </VStack>
-    </container>
+    </Container>
   );
 };
 
