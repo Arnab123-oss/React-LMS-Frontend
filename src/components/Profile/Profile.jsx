@@ -23,33 +23,8 @@ import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { fileUpload } from '../Auth/Register';
 
-const Profile = () => {
-  const user = {
-    name: 'Abhishek',
-    email: 'abhi@gmail.com',
-    createdAt: String(new Date().toISOString()),
-    role: 'user',
-    subscription: {
-      status: 'active',
-    },
-    playlist: [
-      {
-        course: 'gdghjhj',
-        poster:
-          'https://media.istockphoto.com/id/1137985887/photo/two-beautiful-young-cats-walk-in-a-sunny-meadow-on-a-clear-spring-day-raising-their-tails-and.jpg?s=612x612&w=0&k=20&c=1uaefu-4_odFMbXC39L0GS9PI528ZzwWKitRwPzoXtA=',
-      },
-      {
-        course: 'gdghjhj',
-        poster:
-          'https://media.istockphoto.com/id/1304562677/photo/portrait-of-black-cat-between-two-young-women-being-kissed.jpg?s=612x612&w=0&k=20&c=104XvoInMZ536WNiwbMtT8Lnr_ybNkV6sZO19sfMFQk=',
-      },
-      {
-        course: 'gdghjhj',
-        poster:
-          'https://media.istockphoto.com/id/1308388643/photo/two-cute-beautiful-cats-lie-in-an-autumn-sunny-garden-among-fallen-leaves.jpg?s=612x612&w=0&k=20&c=x8toepA6AeJqh2nHQG9t91NU23xVLhiM6pzAM4oLMaI=',
-      },
-    ],
-  };
+const Profile = ({user}) => {
+ 
 
   const removeFromPlaylistHandler = id => {
     console.warn('hjfdhjdfgkj');
@@ -73,7 +48,7 @@ const Profile = () => {
         padding={'8'}
       >
         <VStack>
-          <Avatar boxSize={'48'} />
+          <Avatar boxSize={'48'} src={user.avatar.url} />
           <Button colorScheme={'pink'} variant={'ghost'} onClick={onOpen}>
             Change Photo
           </Button>
@@ -95,7 +70,7 @@ const Profile = () => {
           {user.role !== 'admin' && (
             <HStack>
               <Text children="Subscription" fontWeight={'bold'} />
-              {user.subscription.status === 'active' ? (
+              {user.subscription && user.subscription.status === 'active' ? (
                 <Button color={'pink.500'} variant={'unstyled'}>
                   Cancel Subscription
                 </Button>

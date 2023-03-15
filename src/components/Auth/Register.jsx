@@ -63,7 +63,7 @@ const Register = () => {
     myForm.append('name', name);
     myForm.append('email', email);
     myForm.append('password', password);
-    myForm.append('image', image);
+    myForm.append('file', image);
 
     dispatch(register(myForm));
   };
