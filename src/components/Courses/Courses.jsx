@@ -8,14 +8,14 @@ import {
   Heading,
   Input,
   Button,
-  Card,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourses } from '../../redux/actions/course';
 import { toast } from 'react-hot-toast';
-
+import { addToPlaylist } from '../../redux/actions/profile';
+import {loadUser} from '../../redux/actions/user';
 const Course = ({
   views,
   title,
@@ -25,6 +25,7 @@ const Course = ({
   creator,
   description,
   lectureCount,
+  loading,
 }) => {
   return (
     <VStack className="course" alignItems={['center', 'flex-start']}>
@@ -72,6 +73,7 @@ const Course = ({
         </Link>
 
         <Button
+          isLoading={loading}
           variant={'ghost'}
           colorScheme={'pink'}
           onClick={() => addToPlaylistHandler(id)}
@@ -90,20 +92,24 @@ const Courses = () => {
 
   const dispatch = useDispatch();
 
-  const addToPlaylistHandler = courseId => {
-    console.warn('Add to Play List', courseId);
+  const addToPlaylistHandler = async courseId => {
+    await dispatch(addToPlaylist(courseId));
+    dispatch(loadUser());
   };
   const Categories = [
     'Bachelor of Rural Studies',
     'Ethical Hacking',
     'Cloud Computing',
     'Artificial Intelligence',
-    'Machine Learning and Deep Learning',
+    'Machine Learning',
+    'Deep Learning',
     'Full Stack Developer',
     'Digital Marketing',
     'Cybersecurity',
   ];
-  const { loading, courses, error } = useSelector(state => state.course);
+  const { loading, courses, error, message } = useSelector(
+    state => state.course
+  );
 
   useEffect(() => {
     dispatch(getAllCourses(Category, keyword));
@@ -112,7 +118,11 @@ const Courses = () => {
       toast.error(error);
       dispatch({ type: 'clearError' });
     }
-  }, [Category, keyword, dispatch, error]);
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [Category, keyword, dispatch, error, message]);
 
   return (
     <Container minH={'95vh'} maxW="container.lg" paddingY={'8'}>
@@ -143,7 +153,7 @@ const Courses = () => {
         justifyContent={['flex-start', 'space-evenly']}
         alignItems={['center', 'flex-start']}
       >
-        {courses.length > 0 ? (
+        {courses.length >0 ?
           courses.map(item => (
             <Course
               key={item._id}
@@ -155,11 +165,16 @@ const Courses = () => {
               creator={item.createdBy}
               lectureCount={item.numOfVideos}
               addToPlaylistHandler={addToPlaylistHandler}
+              loading={loading}
             />
-          ))
-        ) : (
-          <Heading opacity={0.5} mt="4" children="Courses Not Found" color={'pink.500'} />
-        )}
+          )):(
+            <Heading
+              opacity={0.5}
+              mt="4"
+              children="Courses Not Found"
+              color={'pink.500'}
+            />
+          )}
       </Stack>
     </Container>
   );

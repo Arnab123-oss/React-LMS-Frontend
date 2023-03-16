@@ -152,7 +152,14 @@ function App() {
             <Route path="/*" element={<NotFound />} />
             <Route path="/paymentsuccess" element={<PaymentSucces />} />
             <Route path="/paymentfail" element={<PaymentFail />} />
-            <Route path="/course/:id" element={<CoursePage />} />
+            <Route
+              path="/course/:id"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <CoursePage user={user} />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Admin Routes */}
             <Route

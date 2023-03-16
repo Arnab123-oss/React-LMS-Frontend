@@ -22,18 +22,22 @@ import React, { useEffect, useState } from 'react';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { fileUpload } from '../Auth/Register';
-import { updateProfilePicture } from '../../redux/actions/profile';
+import {
+  removeFromPlaylist,
+  updateProfilePicture,
+} from '../../redux/actions/profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '../../redux/actions/user';
 import { toast } from 'react-hot-toast';
 
 const Profile = ({ user }) => {
-  const removeFromPlaylistHandler = id => {
-    console.warn('hjfdhjdfgkj');
-  };
-
   const dispatch = useDispatch();
   const { loading, message, error } = useSelector(state => state.profile);
+
+  const removeFromPlaylistHandler = async id => {
+    await dispatch(removeFromPlaylist(id));
+    dispatch(loadUser());
+  };
 
   const changeImageSubmitHandler = async (e, image) => {
     e.preventDefault();
@@ -138,6 +142,7 @@ const Profile = ({ user }) => {
                   </Button>
                 </Link>
                 <Button
+                  isLoading={loading}
                   onClick={() => removeFromPlaylistHandler(element.course)}
                 >
                   <RiDeleteBin7Fill />
@@ -160,7 +165,12 @@ const Profile = ({ user }) => {
 
 export default Profile;
 
-function ChangePhotoBox({ isOpen, onClose, changeImageSubmitHandler,loading }) {
+function ChangePhotoBox({
+  isOpen,
+  onClose,
+  changeImageSubmitHandler,
+  loading,
+}) {
   const [imagePreview, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 
@@ -198,7 +208,12 @@ function ChangePhotoBox({ isOpen, onClose, changeImageSubmitHandler,loading }) {
                   css={{ '&::file-selector-button': fileUpload }}
                   onChange={changeImage}
                 />
-                <Button isLoading={loading} w={'full'} colorScheme="pink" type="submit">
+                <Button
+                  isLoading={loading}
+                  w={'full'}
+                  colorScheme="pink"
+                  type="submit"
+                >
                   Change
                 </Button>
               </VStack>
