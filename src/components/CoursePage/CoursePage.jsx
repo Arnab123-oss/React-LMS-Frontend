@@ -1,46 +1,15 @@
-import { Box, Grid, Heading, Text, VStack,Navigator } from '@chakra-ui/react';
+import { Box, Grid, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import introvideo from '../../assets/images/introvideo.mp4';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useParams } from 'react-router-dom';
 import { getAllLectures } from '../../redux/actions/course';
+import Loader from '../Layout/Loader/Loader';
 
 const CoursePage = ({ user }) => {
   const [lectureNumber, setLectureNumber] = useState(0);
-  const lectures = [
-    {
-      _id: 'sdsddfdfgguhjhjhkjk',
-      title: 'sample',
-      description: 'sample description',
-      video: {
-        url: 'ngrgn',
-      },
-    },
-    {
-      _id: 'sdsddfdfgg1',
-      title: 'sample1',
-      description: 'sample description1',
-      video: {
-        url: 'ngrgn',
-      },
-    },
-    {
-      _id: 'sdsddfdfgg2',
-      title: 'sample2',
-      description: 'sample description2',
-      video: {
-        url: 'ngrgn',
-      },
-    },
-    {
-      _id: 'sdsddfdfgg3',
-      title: 'sample3',
-      description: 'sample description3',
-      video: {
-        url: 'ngrgn',
-      },
-    },
-  ];
+
+  const { lectures, loading } = useSelector(state => state.course);
+
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -53,49 +22,59 @@ const CoursePage = ({ user }) => {
     user.role !== 'admin' &&
     (user.subscription === undefined || user.subscription.status !== 'active')
   ) {
-  
+    return <Navigate to={'/subscribe'} />;
   }
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <Grid minH={'90vh'} templateColumns={['1fr', '3fr 1fr']}>
       {/* px={'12'} py={'20'} */}
-      <Box px={'12'} py={'20'}>
-        <video
-          autoPlay
-          controls
-          width={'100%'}
-          controlsList="nodownload noremoteplayback"
-          disablePictureInPicture
-          disableRemotePlayback
-          src={introvideo}
-        ></video>
-        <Heading
-          m="4"
-          children={`#${lectureNumber + 1} ${lectures[lectureNumber].title}`}
-        />
-        <Heading m="4" children="Description" />
-        <Text m="4" children={lectures[lectureNumber].description} />
-      </Box>
+      {lectures && lectures.length > 0 ? (
+        <>
+          <Box px={'12'} py={'20'}>
+            <video
+              autoPlay
+              controls
+              width={'100%'}
+              controlsList="nodownload noremoteplayback"
+              disablePictureInPicture
+              disableRemotePlayback
+              src={lectures[lectureNumber].video.url}
+            ></video>
+            <Heading
+              m="4"
+              children={`#${lectureNumber + 1} ${
+                lectures[lectureNumber].title
+              }`}
+            />
+            <Heading m="4" children="Description" />
+            <Text m="4" children={lectures[lectureNumber].description} />
+          </Box>
 
-      <VStack>
-        {lectures.map((element, index) => (
-          <button
-            key={element._id}
-            onClick={() => setLectureNumber(index)}
-            style={{
-              width: '80%',
-              padding: '1rem',
-              textAlign: 'center',
-              margin: 0,
-              borderBottom: '1px solid rgba(0,0,0,0.2)',
-            }}
-          >
-            <Text>
-              #{index + 1} {element.title}
-            </Text>
-          </button>
-        ))}
-      </VStack>
+          <VStack>
+            {lectures.map((element, index) => (
+              <button
+                key={element._id}
+                onClick={() => setLectureNumber(index)}
+                style={{
+                  width: '80%',
+                  padding: '1rem',
+                  textAlign: 'center',
+                  margin: 0,
+                  borderBottom: '1px solid rgba(0,0,0,0.2)',
+                }}
+              >
+                <Text>
+                  #{index + 1} {element.title}
+                </Text>
+              </button>
+            ))}
+          </VStack>
+        </>
+      ) : (
+        <Heading children="No Lectures" />
+      )}
     </Grid>
   );
 };

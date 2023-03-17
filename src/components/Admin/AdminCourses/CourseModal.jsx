@@ -28,10 +28,10 @@ const CourseModal = ({ isOpen,
   courseTitle,
   lectures = [1, 2, 3, 4, 5, 6, 7, 8] }) => {
 
-  const { title, setTitle } = useState('');
-  const { desccription, setDescription } = useState('');
-  const { video, setVideo } = useState('');
-  const { videoPrev, setVideoPrev } = useState('');
+  const [title, setTitle ] = useState('');
+  const [description, setDescription ] = useState('');
+  const [ video, setVideo ] = useState('');
+  const [ videoPrev, setVideoPrev ] = useState('');
 
   const changeVideoHandler = e => {
     // console.warn(e.target.files);
@@ -89,7 +89,7 @@ const CourseModal = ({ isOpen,
             </Box>
 
             <Box>
-              <form onSubmit={e => addLectureHandler(e, id, title, desccription, video)}>
+              <form onSubmit={e => addLectureHandler(e, id, title, description, video)}>
                 <VStack spacing={'4'}>
 
                   <Heading children="Add Lecture"
@@ -103,7 +103,7 @@ const CourseModal = ({ isOpen,
 
                   <Input focusBorderColor="purple.300"
                     placeholder="Description"
-                    value={desccription}
+                    value={description}
                     onChange={e => setDescription(e.target.value)} />
 
                   <Input

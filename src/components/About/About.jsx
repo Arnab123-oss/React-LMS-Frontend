@@ -54,7 +54,7 @@ const About = () => {
 
         <Stack m="8" direction={["column", "row"]} alignItems={'center'}>
             <Text fontFamily={'cursive'} m="8" textAlign={['center', 'left']}>
-                We are a vedio streamming platfrom with some premium courses available
+                We are a video streamming platfrom with some premium courses available
                 only for premium users.
             </Text>
 
