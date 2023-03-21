@@ -15,11 +15,19 @@ import {
   Image,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import cursor from '../../../assets/images/cursor.png';
 import Sidebar from '../Sidebar';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import CourseModal from './CourseModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCourses, getAllLectures } from '../../../redux/actions/course';
+import {
+  addLecture,
+  deleteCourse,
+  deleteLecture,
+} from '../../../redux/actions/admin';
+import { toast } from 'react-hot-toast';
 
 // const Row = items => {
 //   console.log(items);
@@ -48,39 +56,57 @@ import CourseModal from './CourseModal';
 // };
 
 const AdminCourses = () => {
-  const courses = [
-    {
-      _id: 'u1',
-      title: 'React',
-      category: 'Web Development',
-      poster: 'admin',
-      poster: {
-        url: 'https://cdn.pixabay.com/photo/2023/01/23/09/26/cat-7738210__340.jpg',
-      },
-      createdBy: 'Arnab Ghosh',
-      views: 123,
-      numOfVideos: 12,
-    },
-  ];
+  const { courses, lectures } = useSelector(state => state.course);
+  const { loading, error, message } = useSelector(state => state.admin);
+  const dispatch = useDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const courseDetailsHandler = userId => {
+  const [courseId, setCourseId] = useState('');
+  const [courseTitle, setCourseTitle] = useState('');
+
+  const courseDetailsHandler = (courseId, title) => {
+    dispatch(getAllLectures(courseId));
     onOpen();
+    setCourseId(courseId);
+    setCourseTitle(title);
   };
 
-  const deleteButtonHandler = userId => {
-    console.log(userId);
-  };
-
-  const deleteLectureButtonHandler = (courseId, lectureId) => {
+  const deleteButtonHandler = courseId => {
     console.log(courseId);
-    console.log(lectureId);
-  }
+    dispatch(deleteCourse(courseId));
+  };
 
-  const addLectureHandler = (e, courseId, title, desccription, video) => {
+  const deleteLectureButtonHandler = async (courseId, lectureId) => {
+    await dispatch(deleteLecture(courseId, lectureId));
+    dispatch(getAllLectures(courseId));
+  };
+
+  const addLectureHandler = async (e, courseId, title, description, video) => {
     e.preventDefault();
-  }
+
+    const myForm = new FormData();
+
+    myForm.append('title', title);
+    myForm.append('description', description);
+    myForm.append('file', video);
+
+    await dispatch(addLecture(courseId, myForm));
+    dispatch(getAllLectures(courseId));
+  };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+    dispatch(getAllCourses());
+  }, [dispatch, error, message]);
 
   return (
     <Grid
@@ -131,7 +157,8 @@ const AdminCourses = () => {
                       <Button
                         variant={'outline'}
                         color={'purple.500'}
-                        onClick={() => courseDetailsHandler(e._id)}
+                        onClick={() => courseDetailsHandler(e._id, e.title)}
+                        isLoading={loading}
                       >
                         View Lectures
                       </Button>
@@ -139,6 +166,7 @@ const AdminCourses = () => {
                       <Button
                         color={'purple.600'}
                         onClick={() => deleteButtonHandler(e._id)}
+                        isLoading={loading}
                       >
                         <RiDeleteBin7Fill />
                       </Button>
@@ -150,11 +178,16 @@ const AdminCourses = () => {
           </Table>
         </TableContainer>
 
-        <CourseModal isOpen={isOpen} onClose={onClose}
-          id={"hfdhjgfj"}
-          courseTitle={"jhdhjhhjz"}
+        <CourseModal
+          isOpen={isOpen}
+          onClose={onClose}
+          id={courseId}
+          courseTitle={courseTitle}
           deleteButtonHandler={deleteLectureButtonHandler}
-          addLectureHandler={addLectureHandler} />
+          addLectureHandler={addLectureHandler}
+          lectures={lectures}
+          loading={loading}
+        />
       </Box>
 
       <Sidebar />

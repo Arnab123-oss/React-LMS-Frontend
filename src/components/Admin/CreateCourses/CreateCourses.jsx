@@ -6,12 +6,15 @@ import {
   Input,
   Select,
   Image,
-  Button
+  Button,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cursor from '../../../assets/images/cursor.png';
 import Sidebar from '../Sidebar';
 import { fileUpload } from '../../Auth/Register';
+import { createCourse } from '../../../redux/actions/admin';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-hot-toast';
 
 const CreateCourses = () => {
   const [title, setTitle] = useState('');
@@ -20,6 +23,9 @@ const CreateCourses = () => {
   const [categories, setCategories] = useState('');
   const [image, setImage] = useState();
   const [imagePrev, setImagePrev] = useState('');
+
+  const dispatch = useDispatch();
+  const { loading, error, message } = useSelector(state => state.admin);
 
   const Category = [
     'Bachelor of Rural Studies',
@@ -47,6 +53,31 @@ const CreateCourses = () => {
     // console.log(e.target.files);
     // setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
+  const submitHandler = e => {
+    e.preventDefault();
+    //title, description, category, createdBy ,file
+    const myForm = new FormData();
+
+    myForm.append('title', title);
+    myForm.append('description', description);
+    myForm.append('category', categories);
+    myForm.append('createdBy', createdBy);
+    myForm.append('file', image);
+
+    dispatch(createCourse(myForm));
+  };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, error, message]);
 
   return (
     <Grid
@@ -55,7 +86,7 @@ const CreateCourses = () => {
       css={{ cursor: `url(${cursor}),default` }}
     >
       <Container py={'16'}>
-        <form>
+        <form onSubmit={submitHandler}>
           <Heading
             textTransform={'uppercase'}
             children="Create Crouse"
@@ -115,10 +146,15 @@ const CreateCourses = () => {
               onChange={changeFileHandler}
             />
             {imagePrev && (
-              <Image src={imagePrev} boxSize='150px' objectFit={'contain'} borderRadius='full' />
+              <Image
+                src={imagePrev}
+                boxSize="150px"
+                objectFit={'contain'}
+                // borderRadius="20px"
+              />
             )}
 
-            <Button w="full" colorScheme={'purple'} type={'submit'}>
+            <Button  isLoading={loading} w="full" colorScheme={'purple'} type={'submit'}>
               Create
             </Button>
           </VStack>

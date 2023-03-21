@@ -1,5 +1,4 @@
 import {
-  AspectRatio,
   Box,
   Button,
   Grid,
@@ -20,18 +19,20 @@ import React, { useState } from 'react';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { fileUpload } from '../../Auth/Register';
 
-const CourseModal = ({ isOpen,
+const CourseModal = ({
+  isOpen,
   onClose,
   id,
   deleteButtonHandler,
   addLectureHandler,
   courseTitle,
-  lectures = [1, 2, 3, 4, 5, 6, 7, 8] }) => {
-
-  const [title, setTitle ] = useState('');
-  const [description, setDescription ] = useState('');
-  const [ video, setVideo ] = useState('');
-  const [ videoPrev, setVideoPrev ] = useState('');
+  lectures = [],
+  loading,
+}) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [video, setVideo] = useState('');
+  const [videoPrev, setVideoPrev] = useState('');
 
   const changeVideoHandler = e => {
     // console.warn(e.target.files);
@@ -51,11 +52,15 @@ const CourseModal = ({ isOpen,
     setVideo('');
     setVideoPrev('');
     onClose();
-
   };
 
   return (
-    <Modal isOpen={isOpen} size={'full'} onClose={handleClose} scrollBehavior="inside" >
+    <Modal
+      isOpen={isOpen}
+      size={'full'}
+      onClose={handleClose}
+      scrollBehavior="inside"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{courseTitle}</ModalHeader>
@@ -64,48 +69,50 @@ const CourseModal = ({ isOpen,
         <ModalBody p="16">
           <Grid templateColumns={['1fr', '3fr 1fr']}>
             <Box px={['0', '16']}>
-
               <Box my={'5'}>
                 <Heading children={courseTitle} />
                 <Heading children={`#${id}`} size={'sm'} opacity={0.4} />
               </Box>
 
-              <Heading children={"Lectures"} size={'lg'} />
+              <Heading children={'Lectures'} size={'lg'} />
 
-              {
-                lectures.map((item, i) => (
-                  <VideoCard
-                    key={i}
-                    num={i + 1}
-                    title="React course"
-                    description="React course description"
-                    lectureId={"tghhggg"}
-                    courseId={id}
-                    deleteButtonHandler={deleteButtonHandler} />
-                ))
-              }
-
-
+              {lectures.map((item, i) => (
+                <VideoCard
+                  key={i}
+                  num={i + 1}
+                  title={item.title}
+                  description={item.description}
+                  lectureId={item._id}
+                  courseId={id}
+                  deleteButtonHandler={deleteButtonHandler}
+                />
+              ))}
             </Box>
 
             <Box>
-              <form onSubmit={e => addLectureHandler(e, id, title, description, video)}>
+              <form
+                onSubmit={e =>
+                  addLectureHandler(e, id, title, description, video)
+                }
+              >
                 <VStack spacing={'4'}>
-
-                  <Heading children="Add Lecture"
+                  <Heading
+                    children="Add Lecture"
                     size={'md'}
-                    textTransform={'uppercase'} />
-
-                  <Input focusBorderColor="purple.300"
+                    textTransform={'uppercase'}
+                  />
+                  <Input
+                    focusBorderColor="purple.300"
                     placeholder="Title"
                     value={title}
-                    onChange={e => setTitle(e.target.value)} />
-
-                  <Input focusBorderColor="purple.300"
+                    onChange={e => setTitle(e.target.value)}
+                  />
+                  <Input
+                    focusBorderColor="purple.300"
                     placeholder="Description"
                     value={description}
-                    onChange={e => setDescription(e.target.value)} />
-
+                    onChange={e => setDescription(e.target.value)}
+                  />
                   <Input
                     accept="video/mp4"
                     required
@@ -120,10 +127,12 @@ const CourseModal = ({ isOpen,
                     onChange={changeVideoHandler}
                   />
                   console.log(videoPreview);
-
                   {videoPrev && (
-                    <video controlsList='nodownload' controls src={videoPrev}></video>
-
+                    <video
+                      controlsList="nodownload"
+                      controls
+                      src={videoPrev}
+                    ></video>
 
                     // <AspectRatio maxW='250px' >
                     //   <iframe
@@ -134,14 +143,17 @@ const CourseModal = ({ isOpen,
                     //   />
                     // </AspectRatio>
                   )}
-
-
-                  <Button w={'full'} colorScheme='purple' type="submit">Upload</Button>
-
+                  <Button
+                    isLoading={loading}
+                    w={'full'}
+                    colorScheme="purple"
+                    type="submit"
+                  >
+                    Upload
+                  </Button>
                 </VStack>
               </form>
             </Box>
-
           </Grid>
         </ModalBody>
 
@@ -155,8 +167,14 @@ const CourseModal = ({ isOpen,
 
 export default CourseModal;
 
-
-function VideoCard({ num, title, description, lectureId, courseId, deleteButtonHandler }) {
+function VideoCard({
+  num,
+  title,
+  description,
+  lectureId,
+  courseId,
+  deleteButtonHandler,
+}) {
   return (
     <Stack
       direction={['column', 'row']}
@@ -164,16 +182,18 @@ function VideoCard({ num, title, description, lectureId, courseId, deleteButtonH
       borderRadius={'lg'}
       boxShadow={'0 0 10px rgba(107,70,193,0.5)'}
       justifyContent={['flex-start', 'space-between']}
-      p={["4", "8"]}>
+      p={['4', '8']}
+    >
       <Box>
         <Heading size={'sm'} children={`#${num} ${title}`} />
         <Text children={description} />
       </Box>
-      <Button color={"purple.600"} onClick={() => deleteButtonHandler(courseId, lectureId)}>
+      <Button
+        color={'purple.600'}
+        onClick={() => deleteButtonHandler(courseId, lectureId)}
+      >
         <RiDeleteBin7Fill />
       </Button>
-
     </Stack>
-
-  )
+  );
 }
