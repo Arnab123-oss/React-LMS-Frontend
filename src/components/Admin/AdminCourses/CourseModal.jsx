@@ -85,6 +85,7 @@ const CourseModal = ({
                   lectureId={item._id}
                   courseId={id}
                   deleteButtonHandler={deleteButtonHandler}
+                  loading={loading}
                 />
               ))}
             </Box>
@@ -126,22 +127,12 @@ const CourseModal = ({
                     }}
                     onChange={changeVideoHandler}
                   />
-                  console.log(videoPreview);
                   {videoPrev && (
                     <video
                       controlsList="nodownload"
                       controls
                       src={videoPrev}
                     ></video>
-
-                    // <AspectRatio maxW='250px' >
-                    //   <iframe
-                    //    title={title}
-                    //     src={videoPreview}
-                    //     allowFullScreen
-                    //     controlsList='nodowmload'
-                    //   />
-                    // </AspectRatio>
                   )}
                   <Button
                     isLoading={loading}
@@ -174,6 +165,7 @@ function VideoCard({
   lectureId,
   courseId,
   deleteButtonHandler,
+  loading
 }) {
   return (
     <Stack
@@ -189,6 +181,7 @@ function VideoCard({
         <Text children={description} />
       </Box>
       <Button
+      isLoading={loading}
         color={'purple.600'}
         onClick={() => deleteButtonHandler(courseId, lectureId)}
       >

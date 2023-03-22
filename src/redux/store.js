@@ -13,7 +13,7 @@ const store = configureStore({
     profile: profileReducer,
     course: courseReducer,
     subscription: subscriptionReducer,
-    admin:adminReducer
+    admin: adminReducer,
   },
 });
 
