@@ -74,7 +74,7 @@ export const adminReducer = createReducer(
       state.error = action.payload;
     },
 
-    deleteCourseRequest: state => {
+      deleteCourseRequest: state => {
         state.loading = true;
       },
       deleteCourseSuccess: (state, action) => {

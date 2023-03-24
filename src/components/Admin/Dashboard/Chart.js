@@ -102,7 +102,7 @@ function getLastYearMonths() {
     const element = months[i];
     labels.unshift(element);
   }
-  console.log(labels);
+  // console.log(labels);
   return labels;
 }
 

@@ -69,6 +69,7 @@ export const deleteLecture = (courseId, lectureId) => async dispatch => {
         `${server}/lecture?courseId=${courseId}&lectureId=${lectureId}}`,
         config
       );
+      console.log(data);
       dispatch({ type: 'deleteLecturesSuccess', payload: data.message });
     } catch (error) {
       dispatch({

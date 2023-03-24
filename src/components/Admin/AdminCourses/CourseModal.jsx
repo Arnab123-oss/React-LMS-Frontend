@@ -87,6 +87,7 @@ const CourseModal = ({
                   deleteButtonHandler={deleteButtonHandler}
                   loading={loading}
                 />
+                
               ))}
             </Box>
 
