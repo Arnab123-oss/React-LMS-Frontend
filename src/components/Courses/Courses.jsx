@@ -97,7 +97,7 @@ const Courses = () => {
     dispatch(loadUser());
   };
   const Categories = [
-    'Bachelor of Rural Studies',
+    'Web Development',
     'Ethical Hacking',
     'Cloud Computing',
     'Artificial Intelligence',
