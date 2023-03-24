@@ -18,8 +18,8 @@ import cursor from '../../../assets/images/cursor.png';
 import Sidebar from '../Sidebar';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../../redux/actions/admin';
-import Loader from '../../Layout/Loader/Loader';
+import { deleteUser, getAllUsers, updateUserRole } from '../../../redux/actions/admin';
+import { toast } from 'react-hot-toast';
 
 // const Row = items => {
 //   console.log(items);
@@ -57,21 +57,29 @@ const User = () => {
   //     subscription: { status: 'active' },
   //   },
   // ];
-  const { users, loading } = useSelector(state => state.admin);
-  console.log(users);
+  const { users, loading,message,error } = useSelector(state => state.admin);
 
   const dispatch = useDispatch();
 
   const updateHandler = userId => {
-    console.log(userId);
+    dispatch(updateUserRole(userId))
   };
 
   const deleteButtonHandler = userId => {
-    console.log(userId);
+ dispatch(deleteUser(userId))
   };
   useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
     dispatch(getAllUsers());
-  }, [dispatch]);
+  }, [dispatch,error,message]);
 
   return (
     <Grid
@@ -79,9 +87,6 @@ const User = () => {
       templateColumns={['1fr', '5fr 1fr']}
       css={{ cursor: `url(${cursor}),default` }}
     >
-      {loading ? (
-        <Loader />
-      ) : (
         <Box p={['0', '16']} overflowX={'auto'}>
           <Heading
             textTransform={'uppercase'}
@@ -125,6 +130,7 @@ const User = () => {
                             variant={'outline'}
                             color={'purple.500'}
                             onClick={() => updateHandler(e._id)}
+                            isLoading={loading}
                           >
                             Change Role
                           </Button>
@@ -132,6 +138,7 @@ const User = () => {
                           <Button
                             color={'purple.600'}
                             onClick={() => deleteButtonHandler(e._id)}
+                            isLoading={loading}
                           >
                             <RiDeleteBin7Fill />
                           </Button>
@@ -143,7 +150,6 @@ const User = () => {
             </Table>
           </TableContainer>
         </Box>
-      )}
 
       <Sidebar />
     </Grid>

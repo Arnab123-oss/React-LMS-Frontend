@@ -4,6 +4,29 @@ export const adminReducer = createReducer(
   {users:[]},
   {
 
+    getAdminStatsRequest: state => {
+      state.loading = true;
+    },
+    getAdminStatsSuccess: (state, action) => {
+      state.loading = false;
+      state.stats = action.payload.stats;
+      state.usersCount = action.payload.usersCount;
+      state.subscriptionCount = action.payload.subscriptionCount;
+      state.viewsCount = action.payload.viewsCount;
+      state.subscriptionPercentage = action.payload.subscriptionPercentage;
+      state.viewsPercentage = action.payload.viewsPercentage;
+      state.userPercentage = action.payload.userPercentage;
+      state.subscriptionProfit = action.payload.subscriptionProfit;
+      state.viewsProfit = action.payload.viewsProfit;
+      state.userProfit = action.payload.userProfit;
+     
+    },
+   
+    getAdminStatsFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     getAllUsersRequest: state => {
       state.loading = true;
     },
@@ -12,6 +35,30 @@ export const adminReducer = createReducer(
       state.users = action.payload;
     },
     getAllUsersFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    deleteUserRequest: state => {
+      state.loading = true;
+    },
+    deleteUserSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    deleteUserFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    updateUserRoleRequest: state => {
+      state.loading = true;
+    },
+    updateUserRoleSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    updateUserRoleFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

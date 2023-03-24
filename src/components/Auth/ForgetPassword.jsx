@@ -29,7 +29,7 @@ const ForgetPassword = () => {
 
   return (
     <Container padding={'16'} h={'90vh'}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} style={{ width: '100%' }}>
         <Heading
           children="Forget password"
           my="16"
@@ -38,7 +38,7 @@ const ForgetPassword = () => {
         />
         <VStack spacing={'8'}>
           <Input
-            requred
+            required
             id="email"
             value={email}
             onChange={e => setEmail(e.target.value)}

@@ -73,14 +73,14 @@ const Register = () => {
       <VStack h={'110vh'} justifyContent="center" spacing={'16'}>
         <Heading textTransform={'uppercase'} children="Registration" />
 
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} >
           <Box my={'4'} display={'flex'} justifyContent={'center'}>
             <Avatar src={imagePreview} size={'xl'} />
           </Box>
           <Box my={'4'}>
             <FormLabel htmlFor="name" children="Name" />
             <Input
-              requred
+              required
               id="name"
               value={name}
               onChange={e => setName(e.target.value)}
@@ -93,7 +93,7 @@ const Register = () => {
           <Box my={'4'}>
             <FormLabel htmlFor="email" children="Email Address" />
             <Input
-              requred
+              required
               id="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
@@ -106,7 +106,7 @@ const Register = () => {
           <Box my={'4'}>
             <FormLabel htmlFor="password" children="password" />
             <Input
-              requred
+              required
               id="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -119,7 +119,7 @@ const Register = () => {
             <FormLabel htmlFor="chooseAvatar" children="Choose Avatar" />
             <Input
               accept="image/*"
-              requred
+              required
               id="chooseAvatar"
               type={'file'}
               focusBorderColor="purple.500"

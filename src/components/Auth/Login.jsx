@@ -29,11 +29,11 @@ const Login = () => {
       <VStack h={'90vh'} justifyContent="center" spacing={'16'}>
         <Heading children="Welcome to our Lms" />
 
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box my={'4'}>
             <FormLabel htmlFor="email" children="Email Address" />
             <Input
-              requred
+              required
               id="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
@@ -46,7 +46,7 @@ const Login = () => {
           <Box my={'4'}>
             <FormLabel htmlFor="password" children="password" />
             <Input
-              requred
+              required
               id="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -57,7 +57,7 @@ const Login = () => {
           </Box>
 
           <Box>
-            <Link to="/fogetpassword">
+            <Link to="/forgetpassword">
               <Button fontSize={'sm'} variant={'link'}>
                 Forget Password
               </Button>

@@ -6,7 +6,7 @@ import { resetPassword } from '../../redux/actions/profile';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 const ResetPassword = () => {
-  const [passsword, setPasssword] = useState('');
+  const [password, setPassword] = useState('');
   const params = useParams();
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(resetPassword(params.token, passsword));
+    dispatch(resetPassword(params.token, password));
   };
 
   useEffect(() => {
@@ -28,11 +28,11 @@ const ResetPassword = () => {
       dispatch({ type: 'clearMessage' });
       navigate('/login');
     }
-  }, [dispatch, message, error]);
+  }, [dispatch, message, error,navigate]);
 
   return (
     <Container padding={'16'} h={'90vh'}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} style={{ width: '100%' }}>
         <Heading
           children="Reset Password"
           my="16"
@@ -41,9 +41,9 @@ const ResetPassword = () => {
         />
         <VStack spacing={'8'}>
           <Input
-            requred
-            value={passsword}
-            onChange={e => setPasssword(e.target.value)}
+            required
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             placeholder="New Password"
             type={'Password'}
             focusBorderColor="purple.500"

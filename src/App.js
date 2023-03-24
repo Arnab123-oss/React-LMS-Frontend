@@ -120,7 +120,7 @@ function App() {
             />
 
             <Route
-              path="/fogetpassword"
+              path="/forgetpassword"
               element={
                 <ProtectedRoute
                   isAuthenticated={!isAuthenticated}
