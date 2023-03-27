@@ -64,7 +64,7 @@ const Profile = ({ user }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Container minH={'95vh'} minW={'lg'} py={'8'}>
+    <Container minH={'95vh'} maxW="container.lg" py={'8'}>
       <Heading children="Profile" m={'8'} textTransform={'uppercase'} />
 
       <Stack
