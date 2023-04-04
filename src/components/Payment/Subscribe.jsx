@@ -12,14 +12,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { server } from '../../redux/store';
 import { buySubscription } from '../../redux/actions/user';
 import { toast } from 'react-hot-toast';
+import vg from '../../assets/images/download.png';
 
-const Subscribe = () => {
+
+const Subscribe = ({user}) => {
   const dispatch = useDispatch();
   const [key, setKey] = useState('');
 
-  const { loading, error, subscriptionId } = useSelector(
-    state => state.course
-  );
+  const { loading, error, subscriptionId } = useSelector(state => state.subscription);
 
   const { error: courseError } = useSelector(state => state.subscription);
 
@@ -42,12 +42,33 @@ const Subscribe = () => {
       dispatch({ type: 'clearError' });
     }
 
-
     if (subscriptionId) {
-      const openPopUp = () => {};
+      const openPopUp = () => {
+        const options = {
+          key,
+          name:"CourseBundler",
+          description:"Get access to all premium content",
+          image:vg,
+          subscription_id:subscriptionId,
+          callback_url:`${server}/paymentverification`,
+          prefill:{
+            name:user.name,
+            email:user.email,
+            contact:""
+          },
+          notes:{
+            address:"Last lamppost in Baruipur"
+          },
+          theme:{
+            color:"#FFC800"
+          }
+        };
+        const razor = new window.Razorpay(options);
+        razor.open();
+      };
       openPopUp();
     }
-  }, [courseError,subscriptionId,error,dispatch]);
+  }, [courseError, subscriptionId, error, dispatch,user.name,user.email,key]);
 
   return (
     <Container h={'90vh'} p={'16'}>
@@ -65,7 +86,7 @@ const Subscribe = () => {
         <Box p={'4'}>
           <VStack textAlign={'center'} px={'8'} mt={'4'} spacing={'8'}>
             <Text children={`Join pro pack and get access to all content.`} />
-            <Heading size={'md'} children={'₹299 only'} />
+            <Heading size={'md'} children={'₹399 only'} />
           </VStack>
 
           <Button
@@ -73,6 +94,7 @@ const Subscribe = () => {
             width={'full'}
             colorScheme={'pink'}
             onClick={subscribeHandler}
+            isLoading={loading}
           >
             Buy Now
           </Button>
@@ -84,7 +106,7 @@ const Subscribe = () => {
         >
           <Heading
             size={'sm'}
-            children={'100% refund at cencellation'}
+            children={'100% refund at cancellation'}
             color={'white'}
             textTransform={'uppercase'}
           />

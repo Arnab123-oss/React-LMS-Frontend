@@ -9,10 +9,11 @@ const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const params = useParams();
   const navigate = useNavigate();
-
+  console.log(params.token);
   const { loading, message, error } = useSelector(state => state.profile);
   const dispatch = useDispatch();
   const submitHandler = e => {
+    
     e.preventDefault();
     dispatch(resetPassword(params.token, password));
   };
@@ -28,7 +29,7 @@ const ResetPassword = () => {
       dispatch({ type: 'clearMessage' });
       navigate('/login');
     }
-  }, [dispatch, message, error,navigate]);
+  }, [dispatch, message, error, navigate]);
 
   return (
     <Container padding={'16'} h={'90vh'}>
