@@ -13,7 +13,7 @@ import Request from './components/Request/Request';
 import About from './components/About/About';
 import Subscribe from './components/Payment/Subscribe';
 import NotFound from './components/Layout/NotFound/NotFound';
-import PaymentSucces from './components/Payment/PaymentSucces';
+import PaymentSuccess from './components/Payment/PaymentSuccess';
 import PaymentFail from './components/Payment/PaymentFail';
 import CoursePage from './components/CoursePage/CoursePage';
 import Profile from './components/Profile/Profile';
@@ -150,7 +150,7 @@ function App() {
               }
             />
             <Route path="/*" element={<NotFound />} />
-            <Route path="/paymentsuccess" element={<PaymentSucces />} />
+            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
             <Route path="/paymentfail" element={<PaymentFail />} />
             <Route
               path="/course/:id"

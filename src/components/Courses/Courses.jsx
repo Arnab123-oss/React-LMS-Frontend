@@ -42,13 +42,13 @@ const Course = ({
       <HStack>
         <Text
           fontWeight={'bold'}
-          textTransfrom="uppercase"
+          textTransform="uppercase"
           children={'creator'}
         />
 
         <Text
           fontFamily={'body'}
-          textTransfrom="uppercase"
+          textTransform="uppercase"
           children={creator}
           size="xs"
         />
@@ -58,13 +58,13 @@ const Course = ({
         textAlign={'center'}
         size="xs"
         children={`Lectures - ${lectureCount}`}
-        textTransfrom="uppercase"
+        textTransform="uppercase"
       />
 
       <Heading
         size="xs"
         children={`Views - ${views}`}
-        textTransfrom="uppercase"
+        textTransform="uppercase"
       />
 
       <Stack direction={['column', 'row']} alignItems="center">
