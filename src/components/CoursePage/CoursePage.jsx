@@ -1,9 +1,10 @@
-import { Box, Grid, Heading, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Grid, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, Link } from 'react-router-dom';
 import { getAllLectures } from '../../redux/actions/course';
 import Loader from '../Layout/Loader/Loader';
+import { RiErrorWarningFill } from 'react-icons/ri';
 
 const CoursePage = ({ user }) => {
   const [lectureNumber, setLectureNumber] = useState(0);
@@ -73,7 +74,16 @@ const CoursePage = ({ user }) => {
           </VStack>
         </>
       ) : (
-        <Heading children="No Lectures" />
+        // <Heading children="No Lectures" />
+        <VStack justifyContent={'center'} h="full" spacing={'4'}>
+          <RiErrorWarningFill size={'5rem'} />
+          <Heading>Oops Lecture Not Found !</Heading>
+          <Link to="/courses">
+            <Button variant={'ghost'} bg={'pink.100'} colorScheme="pink">
+              Go to course
+            </Button>
+          </Link>
+        </VStack>
       )}
     </Grid>
   );

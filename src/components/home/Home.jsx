@@ -26,7 +26,7 @@ const Home = () => {
                   </Link>
             </VStack>
 
-            <Image className = "vector-graphics" boxSize='150px' src={vg} objectFit="contain"/>
+            <Image className = "vector-graphics" boxSize='250px' src={vg} objectFit="contain"/>
 
             </Stack> 
         </div>
