@@ -17,7 +17,7 @@ export const fileUpload = {
   width: '100%',
   height: '100%',
   border: 'none',
-  color: '#ECC948',
+  color: '#F38996',
   backgroundColor: 'white',
 };
 const fileUploadStyle = {
@@ -27,7 +27,7 @@ const fileUploadStyle = {
     width: '110%',
     height: '100%',
     border: 'none',
-    color: '#ECC948',
+    color: '#F38996',
     backgroundColor: 'white',
   },
 };
@@ -86,7 +86,7 @@ const Register = () => {
               onChange={e => setName(e.target.value)}
               placeholder="abc"
               type={'text'}
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
 
@@ -99,7 +99,7 @@ const Register = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
 
@@ -112,7 +112,7 @@ const Register = () => {
               onChange={e => setPassword(e.target.value)}
               placeholder="password"
               type={'password'}
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
           <Box my={'4'}>
@@ -122,20 +122,20 @@ const Register = () => {
               required
               id="chooseAvatar"
               type={'file'}
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
               css={fileUploadStyle}
               onChange={changeFileHandler}
             />
           </Box>
 
-          <Button my="4" colorScheme={'pink'} type="submit">
+          <Button my="4" colorScheme={'teal'} type="submit">
             Sign Up
           </Button>
 
           <Box my="4">
             Already Signup{' '}
             <Link to="/login">
-              <Button colorScheme={'pink'} variant={'link'}>
+              <Button colorScheme={'teal'} variant={'link'}>
                 Login
               </Button>{' '}
               here

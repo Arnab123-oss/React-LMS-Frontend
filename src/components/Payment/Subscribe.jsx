@@ -81,7 +81,7 @@ const Subscribe = ({user}) => {
         spacing="0"
       >
         <Box bg={'pink.400'} p={'4'} css={{ borderRadius: '8px 8px 0 0' }}>
-          <Text color={'black'} children={`Pro Pack - ₹299.00`} />
+          <Text color={'black'} children={`Pro Pack - ₹399.00`} />
         </Box>
         <Box p={'4'}>
           <VStack textAlign={'center'} px={'8'} mt={'4'} spacing={'8'}>

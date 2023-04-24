@@ -6,8 +6,8 @@ import { RiSecurePaymentFill } from 'react-icons/ri'
 const Founder = () => (
 
     <Stack direction={["column", "row"]}
-        spacing={['4', '16']}
-        padding={'8'}>
+    spacing={['4', '16']}
+    padding={'8'}>
 
         <VStack >
             <Avatar boxSize={['40', '48']} src="https://cdn.pixabay.com/photo/2023/02/02/13/27/cat-7762887_960_720.jpg" />
@@ -42,7 +42,7 @@ const TANDC = ({termsAndConditions}) =>(
                     fontFamily={'heading'} >
                         {termsAndConditions}
                     </Text>
-                    <Heading size="xs" children="Refund only applicable for canellation within 7 days" my={'4'}/>
+                    <Heading size="xs" children="Refund only applicable for cancellation within 7 days" my={'4'}/>
             </Box>
         </Box>
 ) ;
@@ -54,7 +54,7 @@ const About = () => {
 
         <Stack m="8" direction={["column", "row"]} alignItems={'center'}>
             <Text fontFamily={'cursive'} m="8" textAlign={['center', 'left']}>
-                We are a video streamming platfrom with some premium courses available
+                We are a video streaming platform with some premium courses available
                 only for premium users.
             </Text>
 

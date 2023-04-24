@@ -50,9 +50,8 @@ function LinkButton({ url, Icon, text, active }) {
       <Button
         fontSize={'larger'}
         variant={'ghost'}
-        colorScheme={active ? 'purple' : ''}
-      >
-        <Icon style={{ marin: '4px' }} />
+        colorScheme={active ? 'purple' : ''}>
+        <Icon style={{ margin: '4px' }} />
         {text}
       </Button>
     </Link>

@@ -30,7 +30,6 @@ const CoursePage = ({ user }) => {
     <Loader />
   ) : (
     <Grid minH={'90vh'} templateColumns={['1fr', '3fr 1fr']}>
-      {/* px={'12'} py={'20'} */}
       {lectures && lectures.length > 0 ? (
         <>
           <Box px={'12'} py={'20'}>
@@ -72,12 +71,15 @@ const CoursePage = ({ user }) => {
               </button>
             ))}
           </VStack>
+        
         </>
+        
       ) : (
         // <Heading children="No Lectures" />
-        <VStack justifyContent={'center'} h="full" spacing={'4'}>
+        
+      <VStack justifyContent={['center']} h="full" spacing={'4'} paddingLeft={['0','300px']} >
           <RiErrorWarningFill size={'5rem'} />
-          <Heading>Oops Lecture Not Found !</Heading>
+          <Heading>Oops No Lecture Available</Heading>
           <Link to="/courses">
             <Button variant={'ghost'} bg={'pink.100'} colorScheme="pink">
               Go to course
@@ -85,7 +87,7 @@ const CoursePage = ({ user }) => {
           </Link>
         </VStack>
       )}
-    </Grid>
+      </Grid>
   );
 };
 

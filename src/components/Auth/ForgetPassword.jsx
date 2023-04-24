@@ -51,7 +51,7 @@ const ForgetPassword = () => {
             isLoading={loading}
             type="submit"
             width="full"
-            colorScheme="pink"
+            colorScheme="teal"
           >
             Send Reset Link
           </Button>

@@ -28,7 +28,7 @@ return(
      <ColorModeSwitcher />
      <Button 
      onClick={onOpen}
-     colorScheme={"pink"} width="12" height={"12"} rounded= "full"
+     colorScheme={"teal"} width="12" height={"12"} rounded= "full"
      position={"fixed"} top="6" left="6">
         <RiMenu5Fill />
      </Button>
@@ -39,7 +39,7 @@ return(
             <DrawerBody>
                 <VStack spacing={'4'} alignItems={"flex-start"}>
                     <LinkButton onClose={onClose} url="/" title="Home"/>
-                    <LinkButton onClose={onClose} url="/courses" title="Browes All Courses"/>
+                    <LinkButton onClose={onClose} url="/courses" title="Browse All Courses"/>
                     <LinkButton onClose={onClose} url="/request" title="Request A course"/>
                     <LinkButton onClose={onClose} url="/contact" title="Contact Us"/>
                     <LinkButton onClose={onClose} url="/about" title="About"/>
@@ -53,7 +53,7 @@ return(
                         <VStack>
                             <HStack>
                             <Link onClick={onClose} to="/profile">
-                              <Button variant={'ghost'} colorScheme={"pink"}>Profile</Button>      
+                              <Button variant={'ghost'} colorScheme={"teal"}>Profile</Button>      
                             </Link>
                             <Button variant={'ghost'} onClick={logoutHandler}>
                                 <RiLogoutBoxLine />
@@ -75,11 +75,11 @@ return(
                         ):(
                         <>
                             <Link onClick={onClose} to="/login">
-                              <Button colorScheme={"pink"} variant={'ghost'}>Login</Button>      
+                              <Button colorScheme={"teal"} variant={'ghost'}>Login</Button>      
                             </Link>
                             <p> OR</p>
                             <Link onClick={onClose} to="/register">
-                              <Button colorScheme={"pink"} variant={'ghost'}>Sign Up</Button>      
+                              <Button colorScheme={"teal"} variant={'ghost'}>Sign Up</Button>      
                             </Link>
                         </>
                         )};

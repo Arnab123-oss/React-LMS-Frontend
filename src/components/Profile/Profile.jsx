@@ -95,23 +95,23 @@ const Profile = ({ user }) => {
         padding={'8'}
       >
         <VStack>
-          <Avatar boxSize={'48'} src={user.avatar.url} />
-          <Button colorScheme={'pink'} variant={'ghost'} onClick={onOpen}>
+          <Avatar boxSize={'48'} src={user.avatar.url} border={"2px"} borderColor={"#F4CACF"}/>
+          <Button colorScheme={'teal'} variant={'ghost'} onClick={onOpen}>
             Change Photo
           </Button>
         </VStack>
 
         <VStack spacing={'4'} alignItems={['center', 'flex-start']}>
           <HStack>
-            <Text children="Name" fontWeight={'bold'} />
+            <Text children="Name :" fontWeight={'bold'} />
             <Text children={user.name} />
           </HStack>
           <HStack>
-            <Text children="Email" fontWeight={'bold'} />
+            <Text children="Email :" fontWeight={'bold'} />
             <Text children={user.email} />
           </HStack>
           <HStack>
-            <Text children="CreatedAt" fontWeight={'bold'} />
+            <Text children="Joined At :" fontWeight={'bold'} />
             <Text children={user.createdAt.split('T')[0]} />
           </HStack>
           {user.role !== 'admin' && (
@@ -120,7 +120,7 @@ const Profile = ({ user }) => {
               {user.subscription && user.subscription.status === 'active' ? (
                 <Button
                   onClick={cancelSubscriptionHandler}
-                  color={'pink.500'}
+                  color={'teal.500'}
                   variant={'unstyled'}
                   isLoading={subscriptionLoading}
                 >
@@ -128,7 +128,7 @@ const Profile = ({ user }) => {
                 </Button>
               ) : (
                 <Link to={'/subscribe'}>
-                  <Button colorScheme={'pink'}>Subscribe</Button>
+                  <Button colorScheme={'teal'}>Subscribe</Button>
                 </Link>
               )}
             </HStack>
@@ -136,17 +136,17 @@ const Profile = ({ user }) => {
 
           <Stack direction={['column', 'row']} alignItems={'center'}>
             <Link to="/updateprofile">
-              <Button>Update Profile</Button>
+              <Button colorScheme='teal' variant='ghost' >Update Profile</Button>
             </Link>
 
             <Link to="/changepassword">
-              <Button>Change Password</Button>
+              <Button colorScheme='teal' variant='ghost'>Change Password</Button>
             </Link>
           </Stack>
         </VStack>
       </Stack>
 
-      <Heading children="Playlist" size={'md'} my={'8'} p={'4'} />
+      <Heading children="My Inventory" size={'md'} my={'8'} p={'4'} />
       {user.playlist.length > 0 && (
         <Stack
           direction={['column', 'row']}
@@ -162,7 +162,7 @@ const Profile = ({ user }) => {
               />
               <HStack>
                 <Link to={`/course/${element.course}`}>
-                  <Button variant={'ghost'} colorScheme="pink">
+                  <Button variant={'ghost'} colorScheme="teal">
                     Watch Now
                   </Button>
                 </Link>
@@ -236,7 +236,7 @@ function ChangePhotoBox({
                 <Button
                   isLoading={loading}
                   w={'full'}
-                  colorScheme="pink"
+                  colorScheme="teal"
                   type="submit"
                 >
                   Change

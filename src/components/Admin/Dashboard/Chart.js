@@ -24,7 +24,7 @@ ChartJS.register(
 );
 export const LineChart = ({ viewsArray = [] }) => {
   const labels = getLastYearMonths();
-  console.log(viewsArray);
+  // console.log(viewsArray);
   const options = {
     responsive: true,
     plugins: {

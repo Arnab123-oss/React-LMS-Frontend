@@ -15,7 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourses } from '../../redux/actions/course';
 import { toast } from 'react-hot-toast';
 import { addToPlaylist } from '../../redux/actions/profile';
-import {loadUser} from '../../redux/actions/user';
+import { loadUser } from '../../redux/actions/user';
+import { FiArrowRightCircle } from 'react-icons/fi';
 const Course = ({
   views,
   title,
@@ -29,21 +30,26 @@ const Course = ({
 }) => {
   return (
     <VStack className="course" alignItems={['center', 'flex-start']}>
-      <Image src={imageSrc} boxSize="60" objectFit={'contain'} />
+      <Image
+        src={imageSrc}
+        boxSize="60"
+        objectFit={'contain'}
+        borderRadius={10}
+      />
       <Heading
         textAlign={['center', 'left']}
         maxW="200px"
         fontFamily={'sans-serif'}
-        noOfLines={3}
+        noOfLines={1}
         children={title}
         size={'sm'}
       />
-      <Text noOfLines={2} children={description} />
+      <Text noOfLines={1} children={description} />
       <HStack>
         <Text
           fontWeight={'bold'}
           textTransform="uppercase"
-          children={'creator'}
+          children={'creator :'}
         />
 
         <Text
@@ -57,25 +63,25 @@ const Course = ({
       <Heading
         textAlign={'center'}
         size="xs"
-        children={`Lectures - ${lectureCount}`}
+        children={`Lectures : ${lectureCount}`}
         textTransform="uppercase"
       />
 
       <Heading
         size="xs"
-        children={`Views - ${views}`}
+        children={`Views : ${views}`}
         textTransform="uppercase"
       />
 
       <Stack direction={['column', 'row']} alignItems="center">
         <Link to={`/course/${id}`}>
-          <Button colorScheme={'pink'}> Watch Now</Button>
+          <Button colorScheme={'teal'}> Watch Now</Button>
         </Link>
 
         <Button
           isLoading={loading}
           variant={'ghost'}
-          colorScheme={'pink'}
+          colorScheme={'teal'}
           onClick={() => addToPlaylistHandler(id)}
         >
           {' '}
@@ -94,6 +100,9 @@ const Courses = () => {
 
   const addToPlaylistHandler = async courseId => {
     await dispatch(addToPlaylist(courseId));
+    dispatch(loadUser());
+  };
+  const refresh = () => {
     dispatch(loadUser());
   };
   const Categories = [
@@ -125,8 +134,25 @@ const Courses = () => {
   }, [Category, keyword, dispatch, error, message]);
 
   return (
-    <Container minH={'95vh'} maxW="container.lg" paddingY={'8'}>
-      <Heading children="All Courses" m={'8'} />
+    <Container minH={'95vh'} maxW="container.lg" paddingY={'8'}  >
+      {/* <Heading children="All Courses"/> */}
+      <Text fontSize="3xl" m={8} textAlign={["center","left"]} >
+        All Courses
+        <Link to={'/courses'}>
+          <Button
+            fontSize={'25'}
+            variant={'link'}
+            colorScheme={'teal'}
+            rounded= "full"
+            onClick={() => refresh()}
+            top="1" left="1"
+          >
+            <FiArrowRightCircle />
+          </Button>
+        </Link>
+      </Text>
+
+
       <Input
         value={keyword}
         onChange={e => setKeyword(e.target.value)}
@@ -138,6 +164,7 @@ const Courses = () => {
       <HStack
         overflowX={'auto'}
         paddingY={'8'}
+        position={""}
         css={{ '&::-webkit-scrollbar': { display: 'none' } }}
       >
         {Categories.map((item, index) => (
@@ -153,7 +180,7 @@ const Courses = () => {
         justifyContent={['flex-start', 'space-evenly']}
         alignItems={['center', 'flex-start']}
       >
-        {courses.length >0 ?
+        {courses.length > 0 ? (
           courses.map(item => (
             <Course
               key={item._id}
@@ -167,14 +194,15 @@ const Courses = () => {
               addToPlaylistHandler={addToPlaylistHandler}
               loading={loading}
             />
-          )):(
-            <Heading
-              opacity={0.5}
-              mt="4"
-              children="Courses Not Found"
-              color={'pink.500'}
-            />
-          )}
+          ))
+        ) : (
+          <Heading
+            opacity={0.5}
+            mt="4"
+            children="Courses Not Found"
+            color={'pink.500'}
+          />
+        )}
       </Stack>
     </Container>
   );
