@@ -3,7 +3,7 @@ import { Box, HStack, Heading, Stack, VStack } from '@chakra-ui/react'
 import { TiSocialYoutubeCircular, TiSocialInstagramCircular } from "react-icons/ti"
 import { DiGithub } from "react-icons/di"
 const Footer = () => {
-    return <Box padding={'4'} bg="#F5F1BF" minH={'10vh'}>
+    return <Box padding={'4'} bg="#F4CACF" minH={'10vh'}>
         <Stack direction={["column", "row"]}>
             <VStack alignItems={["center", "flex-start"]} width="full">
                 <Heading children="All Rights Reserved" size='sm' color={"black"} />

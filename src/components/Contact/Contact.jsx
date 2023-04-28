@@ -54,7 +54,7 @@ const {loading,error,message:stateMessage } = useSelector(state=>state.other)
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="Enter your name"
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
           <Box my={'4'}>
@@ -66,7 +66,7 @@ const {loading,error,message:stateMessage } = useSelector(state=>state.other)
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
           <Box my={'4'}>
@@ -77,17 +77,17 @@ const {loading,error,message:stateMessage } = useSelector(state=>state.other)
               value={message}
               onChange={e => setMessage(e.target.value)}
               placeholder="Enter your message"
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
 
-          <Button  isLoading={loading} my="4" colorScheme={'pink'} type="submit">
+          <Button  isLoading={loading} my="4" colorScheme={'teal'} type="submit">
             Send Mail
           </Button>
           <Box my="4">
             Request for a course{' '}
             <Link to="/request">
-              <Button colorScheme={'pink'} variant={'link'}>
+              <Button colorScheme={'teal'} variant={'link'}>
                 Click
               </Button>{' '}
               here

@@ -53,7 +53,7 @@ const Request = () => {
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="Enter your name"
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
           <Box my={'4'}>
@@ -65,7 +65,7 @@ const Request = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
           <Box my={'4'}>
@@ -76,17 +76,17 @@ const Request = () => {
               value={course}
               onChange={e => setCourse(e.target.value)}
               placeholder="Explain the course...."
-              focusBorderColor="purple.500"
+              focusBorderColor="#F4CACF"
             />
           </Box>
 
-          <Button  isLoading={loading} my="4" colorScheme={'pink'} type="submit">
+          <Button  isLoading={loading} my="4" colorScheme={'teal'} type="submit">
             Send Mail
           </Button>
           <Box my="4">
             see available courses!{' '}
             <Link to="/courses">
-              <Button colorScheme={'pink'} variant={'link'}>
+              <Button colorScheme={'teal'} variant={'link'}>
                 Click
               </Button>{' '}
               here

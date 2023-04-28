@@ -80,7 +80,7 @@ const Subscribe = ({user}) => {
         borderRadius={'lg'}
         spacing="0"
       >
-        <Box bg={'pink.400'} p={'4'} css={{ borderRadius: '8px 8px 0 0' }}>
+        <Box bg={'teal'} p={'4'} css={{ borderRadius: '8px 8px 0 0' }}>
           <Text color={'black'} children={`Pro Pack - ₹399.00`} />
         </Box>
         <Box p={'4'}>
@@ -92,7 +92,7 @@ const Subscribe = ({user}) => {
           <Button
             my={'8'}
             width={'full'}
-            colorScheme={'pink'}
+            colorScheme={'teal'}
             onClick={subscribeHandler}
             isLoading={loading}
           >

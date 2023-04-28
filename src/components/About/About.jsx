@@ -59,7 +59,7 @@ const About = () => {
             </Text>
 
             <Link to="/subscribe">
-                <Button variant={'ghost'} colorScheme="pink">
+                <Button variant={'ghost'} colorScheme="teal">
                     Checkout Our Plan
                 </Button>
 

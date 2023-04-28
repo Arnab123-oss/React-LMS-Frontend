@@ -21,7 +21,7 @@ const Home = () => {
                   <Heading  children="LEARN FROM THE EXPERTS" size={'2xl'} />
                   <Text fontSize={'2xl'} fontFamily={'cursive'} textAlign={['center','left']} children="Find Valuable Content At Reasonable Price" />
                   <Link to="/courses">
-                    <Button size = {"lg"} colorScheme="pink">
+                    <Button size = {"lg"} colorScheme="teal">
                         Explore Now
                     </Button>
                   </Link>
@@ -33,7 +33,7 @@ const Home = () => {
         </div>
             <Box padding={'4'} bg="blackAlpha.800">
                 <Heading textAlign={'center'} fontFamily= "body" 
-                color={'pink.400'} children="OUR BRANDS"/>
+                color={'#98E2D7'} children="OUR BRANDS"/>
                 <HStack className="brandsBanner" justifyContent={"space-evenly"} marginTop="4">
                     <CgGoogle />
                     <CgYoutube />
