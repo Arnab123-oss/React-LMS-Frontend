@@ -6,7 +6,7 @@ export const getAllCourses = (category = '', keyword = '') =>
     try {
       dispatch({ type: 'allCoursesRequest' });
       const { data } = await axios.get(
-        `${server}/courses?keyword=${keyword}&category=${category}`
+        `${server}/course?keyword=${keyword}&category=${category}`
       );
       dispatch({ type: 'allCoursesSuccess', payload: data.courses });
     } catch (error) {
