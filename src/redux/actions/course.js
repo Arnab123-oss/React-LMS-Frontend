@@ -11,6 +11,7 @@ export const getAllCourses = (category = '', keyword = '') =>
       dispatch({ type: 'allCoursesSuccess', payload: data.courses });
     } catch (error) {
       dispatch({
+        console.log(error)
         type: 'allCoursesFail',
         payload: error.response.data.message,
       });
