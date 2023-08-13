@@ -66,6 +66,7 @@ const Register = () => {
     myForm.append('file', image);
 
     dispatch(register(myForm));
+    console.log(myForm)
   };
 
   return (
